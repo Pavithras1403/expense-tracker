@@ -1,0 +1,13 @@
+function ExpenseList({ expenses }) {
+  return (
+    <ul>
+      {expenses.map((expense, index) => (
+        <li key={index}>
+          {expense.description} - ${expense.amount} - {expense.category} - {expense.date}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+export default ExpenseList;

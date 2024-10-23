@@ -1,0 +1,43 @@
+// src/components/BudgetForm.js
+import React, { useState } from 'react';
+
+const BudgetForm = ({ budgets, setBudgets }) => {
+  const [newBudget, setNewBudget] = useState({ category: '', amount: '' });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setNewBudget({ ...newBudget, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (newBudget.category && newBudget.amount) {
+      setBudgets({ ...budgets, [newBudget.category]: parseFloat(newBudget.amount) });
+      setNewBudget({ category: '', amount: '' }); // Reset form
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        name="category"
+        value={newBudget.category}
+        onChange={handleChange}
+        placeholder="Budget Category"
+        required
+      />
+      <input
+        type="number"
+        name="amount"
+        value={newBudget.amount}
+        onChange={handleChange}
+        placeholder="Budget Amount"
+        required
+      />
+      <button type="submit">Set Budget</button>
+    </form>
+  );
+};
+
+export default BudgetForm;
